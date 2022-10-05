@@ -22,6 +22,8 @@ use crate::{
 		millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
 		rialto_headers_to_millau::RialtoToMillauCliBridge,
 		westend_headers_to_millau::WestendToMillauCliBridge,
+		pass3dt_headers_to_pass3d::Pass3dtToPass3dCliBridge,
+		pass3d_headers_to_pass3dt::Pass3dToPass3dtCliBridge,
 	},
 	cli::{bridge::CliBridgeBase, chain_schema::*},
 };
@@ -54,6 +56,8 @@ pub enum InitBridgeName {
 	RialtoToMillau,
 	WestendToMillau,
 	MillauToRialtoParachain,
+	Pass3dtToPass3d,
+	Pass3dToPass3dt,
 }
 
 #[async_trait]
@@ -163,6 +167,32 @@ impl BridgeInitializer for WestendToMillauCliBridge {
 	}
 }
 
+impl BridgeInitializer for Pass3dtToPass3dCliBridge {
+	type Engine = GrandpaFinalityEngine<Self::Source>;
+
+	fn encode_init_bridge(
+		init_data: <Self::Engine as Engine<Self::Source>>::InitializationData,
+	) -> <Self::Target as Chain>::Call {
+		pass3d_runtime::SudoCall::sudo {
+			call: Box::new(pass3d_runtime::BridgeGrandpaCall::initialize { init_data }.into()),
+		}
+			.into()
+	}
+}
+
+impl BridgeInitializer for Pass3dToPass3dtCliBridge {
+	type Engine = GrandpaFinalityEngine<Self::Source>;
+
+	fn encode_init_bridge(
+		init_data: <Self::Engine as Engine<Self::Source>>::InitializationData,
+	) -> <Self::Target as Chain>::Call {
+		pass3dt_runtime::SudoCall::sudo {
+			call: Box::new(pass3dt_runtime::BridgeGrandpaCall::initialize { init_data }.into()),
+		}
+			.into()
+	}
+}
+
 impl InitBridge {
 	/// Run the command.
 	pub async fn run(self) -> anyhow::Result<()> {
@@ -172,6 +202,8 @@ impl InitBridge {
 			InitBridgeName::WestendToMillau => WestendToMillauCliBridge::init_bridge(self),
 			InitBridgeName::MillauToRialtoParachain =>
 				MillauToRialtoParachainCliBridge::init_bridge(self),
+			InitBridgeName::Pass3dtToPass3d => Pass3dtToPass3dCliBridge::init_bridge(self),
+			InitBridgeName::Pass3dToPass3dt => Pass3dToPass3dtCliBridge::init_bridge(self),
 		}
 		.await
 	}

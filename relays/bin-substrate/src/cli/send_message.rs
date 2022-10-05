@@ -20,6 +20,8 @@ use crate::{
 		millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
 		rialto_headers_to_millau::RialtoToMillauCliBridge,
 		rialto_parachains_to_millau::RialtoParachainToMillauCliBridge,
+		pass3dt_headers_to_pass3d::Pass3dtToPass3dCliBridge,
+		pass3d_headers_to_pass3dt::Pass3dToPass3dtCliBridge,
 	},
 	cli::{
 		bridge::{FullBridge, MessagesCliBridge},
@@ -200,6 +202,8 @@ impl MessageSender for MillauToRialtoCliBridge {}
 impl MessageSender for RialtoToMillauCliBridge {}
 impl MessageSender for MillauToRialtoParachainCliBridge {}
 impl MessageSender for RialtoParachainToMillauCliBridge {}
+impl MessageSender for Pass3dtToPass3dCliBridge {}
+impl MessageSender for Pass3dToPass3dtCliBridge {}
 
 impl SendMessage {
 	/// Run the command.
@@ -211,6 +215,8 @@ impl SendMessage {
 				MillauToRialtoParachainCliBridge::send_message(self),
 			FullBridge::RialtoParachainToMillau =>
 				RialtoParachainToMillauCliBridge::send_message(self),
+			FullBridge::Pass3dtToPass3d => Pass3dtToPass3dCliBridge::send_message(self),
+			FullBridge::Pass3dToPass3dt => Pass3dToPass3dtCliBridge::send_message(self),
 		}
 		.await
 	}

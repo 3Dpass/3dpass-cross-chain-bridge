@@ -22,6 +22,8 @@ strum = { version = "0.21.0", features = ["derive"] }
 
 bp-messages = { path = "../../primitives/messages" }
 bp-millau = { path = "../../primitives/chain-millau" }
+bp-pass3dt = { path = "../../primitives/chain-pass3dt" }
+bp-pass3d = { path = "../../primitives/chain-pass3d" }
 bp-polkadot-core = { path = "../../primitives/polkadot-core" }
 bp-rialto = { path = "../../primitives/chain-rialto" }
 bp-rialto-parachain = { path = "../../primitives/chain-rialto-parachain" }
@@ -30,11 +32,15 @@ bp-westend = { path = "../../primitives/chain-westend" }
 bridge-runtime-common = { path = "../../bin/runtime-common" }
 messages-relay = { path = "../messages" }
 millau-runtime = { path = "../../bin/millau/runtime" }
+pass3dt-runtime = { path = "../../bin/pass3dt/runtime" }
+pass3d-runtime = { path = "../../bin/pass3d/runtime" }
 pallet-bridge-messages = { path = "../../modules/messages" }
 pallet-bridge-parachains = { path = "../../modules/parachains" }
 parachains-relay = { path = "../parachains" }
 relay-millau-client = { path = "../client-millau" }
 relay-rialto-client = { path = "../client-rialto" }
+relay-pass3dt-client = { path = "../client-pass3dt" }
+relay-pass3d-client = { path = "../client-pass3d" }
 relay-rialto-parachain-client = { path = "../client-rialto-parachain" }
 relay-substrate-client = { path = "../client-substrate" }
 relay-utils = { path = "../utils" }

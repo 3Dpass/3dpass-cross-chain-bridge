@@ -25,6 +25,8 @@ use crate::chains::{
 	millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
 	rialto_headers_to_millau::RialtoToMillauCliBridge,
 	westend_headers_to_millau::WestendToMillauCliBridge,
+	pass3dt_headers_to_pass3d::Pass3dtToPass3dCliBridge,
+	pass3d_headers_to_pass3dt::Pass3dToPass3dtCliBridge,
 };
 use relay_utils::metrics::{GlobalMetrics, StandaloneMetric};
 use substrate_relay_helper::finality::SubstrateFinalitySyncPipeline;
@@ -59,6 +61,8 @@ pub enum RelayHeadersBridge {
 	RialtoToMillau,
 	WestendToMillau,
 	MillauToRialtoParachain,
+	Pass3dtToPass3d,
+	Pass3dToPass3dt,
 }
 
 #[async_trait]
@@ -102,6 +106,8 @@ impl HeadersRelayer for MillauToRialtoCliBridge {}
 impl HeadersRelayer for RialtoToMillauCliBridge {}
 impl HeadersRelayer for WestendToMillauCliBridge {}
 impl HeadersRelayer for MillauToRialtoParachainCliBridge {}
+impl HeadersRelayer for Pass3dtToPass3dCliBridge {}
+impl HeadersRelayer for Pass3dToPass3dtCliBridge {}
 
 impl RelayHeaders {
 	/// Run the command.
@@ -112,6 +118,9 @@ impl RelayHeaders {
 			RelayHeadersBridge::WestendToMillau => WestendToMillauCliBridge::relay_headers(self),
 			RelayHeadersBridge::MillauToRialtoParachain =>
 				MillauToRialtoParachainCliBridge::relay_headers(self),
+			RelayHeadersBridge::Pass3dtToPass3d => Pass3dtToPass3dCliBridge::relay_headers(self),
+			RelayHeadersBridge::Pass3dToPass3dt => Pass3dToPass3dtCliBridge::relay_headers(self),
+
 		}
 		.await
 	}

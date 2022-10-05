@@ -33,6 +33,8 @@ pub enum FullBridge {
 	RialtoToMillau,
 	MillauToRialtoParachain,
 	RialtoParachainToMillau,
+	Pass3dtToPass3d,
+	Pass3dToPass3dt,
 }
 
 impl FullBridge {
@@ -43,6 +45,8 @@ impl FullBridge {
 			Self::RialtoToMillau => RIALTO_TO_MILLAU_INDEX,
 			Self::MillauToRialtoParachain => MILLAU_TO_RIALTO_PARACHAIN_INDEX,
 			Self::RialtoParachainToMillau => RIALTO_PARACHAIN_TO_MILLAU_INDEX,
+			Self::Pass3dtToPass3d => PASS3DT_TO_PASS3D_INDEX,
+			Self::Pass3dToPass3dt => PASS3D_TO_PASS3DT_INDEX,
 		}
 	}
 }
@@ -51,6 +55,8 @@ pub const RIALTO_TO_MILLAU_INDEX: u8 = 0;
 pub const MILLAU_TO_RIALTO_INDEX: u8 = 0;
 pub const MILLAU_TO_RIALTO_PARACHAIN_INDEX: u8 = 1;
 pub const RIALTO_PARACHAIN_TO_MILLAU_INDEX: u8 = 0;
+pub const PASS3D_TO_PASS3DT_INDEX: u8 = 0;
+pub const PASS3DT_TO_PASS3D_INDEX: u8 = 0;
 
 /// Minimal bridge representation that can be used from the CLI.
 /// It connects a source chain to a target chain.

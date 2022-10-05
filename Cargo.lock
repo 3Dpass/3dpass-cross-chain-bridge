@@ -768,6 +768,43 @@ dependencies = [
 ]
 
 [[package]]
+name = "bp-pass3d"
+version = "0.1.0"
+dependencies = [
+ "bp-messages",
+ "bp-runtime",
+ "frame-support",
+ "frame-system",
+ "sp-api",
+ "sp-core",
+ "sp-runtime",
+ "sp-std",
+]
+
+[[package]]
+name = "bp-pass3dt"
+version = "0.1.0"
+dependencies = [
+ "bp-messages",
+ "bp-runtime",
+ "fixed-hash",
+ "frame-support",
+ "frame-system",
+ "hash256-std-hasher",
+ "impl-codec",
+ "impl-serde",
+ "parity-util-mem",
+ "scale-info",
+ "serde",
+ "sp-api",
+ "sp-core",
+ "sp-io",
+ "sp-runtime",
+ "sp-std",
+ "sp-trie",
+]
+
+[[package]]
 name = "bp-polkadot"
 version = "0.1.0"
 dependencies = [
@@ -3642,6 +3679,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "jsonrpc-core"
+version = "18.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "14f7f76aef2d054868398427f6c54943cf3d1caa9a7ec7d0c38d69df97a965eb"
+dependencies = [
+ "futures",
+ "futures-executor",
+ "futures-util",
+ "log",
+ "serde",
+ "serde_derive",
+ "serde_json",
+]
+
+[[package]]
 name = "jsonrpsee"
 version = "0.15.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6491,6 +6543,250 @@ dependencies = [
 ]
 
 [[package]]
+name = "pass3d-bridge-node"
+version = "0.1.0"
+dependencies = [
+ "beefy-gadget",
+ "beefy-gadget-rpc",
+ "beefy-primitives",
+ "bp-rialto",
+ "bp-runtime",
+ "clap 3.2.18",
+ "frame-benchmarking",
+ "frame-benchmarking-cli",
+ "frame-system-rpc-runtime-api",
+ "futures",
+ "jsonrpc-core",
+ "kvdb",
+ "kvdb-rocksdb",
+ "lru 0.7.8",
+ "node-inspect",
+ "pallet-bridge-messages",
+ "pallet-mmr-rpc",
+ "pallet-transaction-payment-rpc",
+ "pallet-transaction-payment-rpc-runtime-api",
+ "pass3d-runtime",
+ "polkadot-node-core-pvf",
+ "polkadot-primitives",
+ "polkadot-runtime-parachains",
+ "polkadot-service",
+ "sc-authority-discovery",
+ "sc-basic-authorship",
+ "sc-cli",
+ "sc-client-api",
+ "sc-consensus",
+ "sc-consensus-babe",
+ "sc-consensus-slots",
+ "sc-consensus-uncles",
+ "sc-executor",
+ "sc-finality-grandpa",
+ "sc-finality-grandpa-rpc",
+ "sc-keystore",
+ "sc-network",
+ "sc-rpc",
+ "sc-service",
+ "sc-telemetry",
+ "sc-transaction-pool",
+ "serde_json",
+ "sp-api",
+ "sp-authority-discovery",
+ "sp-authorship",
+ "sp-block-builder",
+ "sp-blockchain",
+ "sp-consensus",
+ "sp-consensus-babe",
+ "sp-core",
+ "sp-finality-grandpa",
+ "sp-inherents",
+ "sp-mmr-primitives",
+ "sp-offchain",
+ "sp-runtime",
+ "sp-session",
+ "sp-timestamp",
+ "sp-transaction-pool",
+ "substrate-build-script-utils",
+ "substrate-frame-rpc-system",
+ "substrate-prometheus-endpoint",
+ "thiserror",
+]
+
+[[package]]
+name = "pass3d-runtime"
+version = "0.1.0"
+dependencies = [
+ "beefy-primitives",
+ "bp-header-chain",
+ "bp-messages",
+ "bp-millau",
+ "bp-pass3d",
+ "bp-pass3dt",
+ "bp-relayers",
+ "bp-runtime",
+ "bridge-runtime-common",
+ "env_logger 0.8.4",
+ "frame-benchmarking",
+ "frame-executive",
+ "frame-support",
+ "frame-system",
+ "frame-system-rpc-runtime-api",
+ "hex-literal",
+ "libsecp256k1",
+ "log",
+ "pallet-authority-discovery",
+ "pallet-babe",
+ "pallet-balances",
+ "pallet-beefy",
+ "pallet-beefy-mmr",
+ "pallet-bridge-grandpa",
+ "pallet-bridge-messages",
+ "pallet-bridge-relayers",
+ "pallet-grandpa",
+ "pallet-mmr",
+ "pallet-session",
+ "pallet-shift-session-manager",
+ "pallet-sudo",
+ "pallet-timestamp",
+ "pallet-transaction-payment",
+ "pallet-transaction-payment-rpc-runtime-api",
+ "pallet-xcm",
+ "parity-scale-codec",
+ "polkadot-primitives",
+ "polkadot-runtime-common",
+ "polkadot-runtime-parachains",
+ "scale-info",
+ "serde",
+ "sp-api",
+ "sp-authority-discovery",
+ "sp-block-builder",
+ "sp-consensus-babe",
+ "sp-core",
+ "sp-finality-grandpa",
+ "sp-inherents",
+ "sp-io",
+ "sp-mmr-primitives",
+ "sp-offchain",
+ "sp-runtime",
+ "sp-session",
+ "sp-std",
+ "sp-transaction-pool",
+ "sp-trie",
+ "sp-version",
+ "static_assertions",
+ "substrate-wasm-builder",
+ "xcm",
+ "xcm-builder",
+ "xcm-executor",
+]
+
+[[package]]
+name = "pass3dt-bridge-node"
+version = "0.1.0"
+dependencies = [
+ "beefy-gadget",
+ "beefy-gadget-rpc",
+ "beefy-primitives",
+ "bp-pass3dt",
+ "bp-runtime",
+ "clap 3.2.18",
+ "frame-benchmarking",
+ "frame-benchmarking-cli",
+ "jsonrpsee",
+ "node-inspect",
+ "pallet-bridge-messages",
+ "pallet-mmr-rpc",
+ "pallet-transaction-payment-rpc",
+ "pass3dt-runtime",
+ "sc-basic-authorship",
+ "sc-cli",
+ "sc-client-api",
+ "sc-consensus",
+ "sc-consensus-aura",
+ "sc-executor",
+ "sc-finality-grandpa",
+ "sc-finality-grandpa-rpc",
+ "sc-keystore",
+ "sc-rpc",
+ "sc-service",
+ "sc-telemetry",
+ "sc-transaction-pool",
+ "serde_json",
+ "sp-consensus",
+ "sp-consensus-aura",
+ "sp-core",
+ "sp-finality-grandpa",
+ "sp-runtime",
+ "sp-timestamp",
+ "substrate-build-script-utils",
+ "substrate-frame-rpc-system",
+]
+
+[[package]]
+name = "pass3dt-runtime"
+version = "0.1.0"
+dependencies = [
+ "beefy-primitives",
+ "bp-header-chain",
+ "bp-messages",
+ "bp-pass3d",
+ "bp-pass3dt",
+ "bp-polkadot-core",
+ "bp-relayers",
+ "bp-runtime",
+ "bp-westend",
+ "bridge-runtime-common",
+ "env_logger 0.8.4",
+ "frame-benchmarking",
+ "frame-executive",
+ "frame-support",
+ "frame-system",
+ "frame-system-rpc-runtime-api",
+ "hex-literal",
+ "libsecp256k1",
+ "log",
+ "pallet-aura",
+ "pallet-balances",
+ "pallet-beefy",
+ "pallet-beefy-mmr",
+ "pallet-bridge-grandpa",
+ "pallet-bridge-messages",
+ "pallet-bridge-parachains",
+ "pallet-bridge-relayers",
+ "pallet-grandpa",
+ "pallet-mmr",
+ "pallet-randomness-collective-flip",
+ "pallet-session",
+ "pallet-shift-session-manager",
+ "pallet-sudo",
+ "pallet-timestamp",
+ "pallet-transaction-payment",
+ "pallet-transaction-payment-rpc-runtime-api",
+ "pallet-xcm",
+ "parity-scale-codec",
+ "scale-info",
+ "serde",
+ "sp-api",
+ "sp-block-builder",
+ "sp-consensus-aura",
+ "sp-core",
+ "sp-finality-grandpa",
+ "sp-inherents",
+ "sp-io",
+ "sp-mmr-primitives",
+ "sp-offchain",
+ "sp-runtime",
+ "sp-session",
+ "sp-std",
+ "sp-transaction-pool",
+ "sp-trie",
+ "sp-version",
+ "static_assertions",
+ "substrate-wasm-builder",
+ "xcm",
+ "xcm-builder",
+ "xcm-executor",
+]
+
+[[package]]
 name = "paste"
 version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -8265,6 +8561,40 @@ dependencies = [
 ]
 
 [[package]]
+name = "relay-pass3d-client"
+version = "0.1.0"
+dependencies = [
+ "bp-messages",
+ "bp-pass3d",
+ "frame-support",
+ "frame-system",
+ "pallet-transaction-payment",
+ "parity-scale-codec",
+ "pass3d-runtime",
+ "relay-substrate-client",
+ "relay-utils",
+ "sp-core",
+ "sp-runtime",
+]
+
+[[package]]
+name = "relay-pass3dt-client"
+version = "0.1.0"
+dependencies = [
+ "bp-messages",
+ "bp-pass3dt",
+ "frame-support",
+ "frame-system",
+ "pallet-transaction-payment",
+ "parity-scale-codec",
+ "pass3dt-runtime",
+ "relay-substrate-client",
+ "relay-utils",
+ "sp-core",
+ "sp-runtime",
+]
+
+[[package]]
 name = "relay-polkadot-client"
 version = "0.1.0"
 dependencies = [
@@ -9204,6 +9534,17 @@ dependencies = [
  "sp-runtime",
  "sp-state-machine",
  "sp-timestamp",
+ "thiserror",
+]
+
+[[package]]
+name = "sc-consensus-uncles"
+version = "0.10.0-dev"
+source = "git+https://github.com/paritytech/substrate?branch=master#7a8de4995715cc6cd11a79eb262bf41e5b190943"
+dependencies = [
+ "sc-client-api",
+ "sp-authorship",
+ "sp-runtime",
  "thiserror",
 ]
 
@@ -11255,6 +11596,8 @@ dependencies = [
  "async-trait",
  "bp-messages",
  "bp-millau",
+ "bp-pass3d",
+ "bp-pass3dt",
  "bp-polkadot-core",
  "bp-rialto",
  "bp-rialto-parachain",
@@ -11276,11 +11619,15 @@ dependencies = [
  "pallet-bridge-parachains",
  "parachains-relay",
  "parity-scale-codec",
+ "pass3d-runtime",
+ "pass3dt-runtime",
  "polkadot-parachain",
  "polkadot-primitives",
  "polkadot-runtime-common",
  "polkadot-runtime-parachains",
  "relay-millau-client",
+ "relay-pass3d-client",
+ "relay-pass3dt-client",
  "relay-rialto-client",
  "relay-rialto-parachain-client",
  "relay-substrate-client",
@@ -11947,9 +12294,9 @@ version = "1.6.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "97fee6b57c6a41524a810daee9286c02d7752c4253064d0b05472833a438f675"
 dependencies = [
- "cfg-if 0.1.10",
+ "cfg-if 1.0.0",
  "digest 0.10.3",
- "rand 0.7.3",
+ "rand 0.8.5",
  "static_assertions",
 ]
 

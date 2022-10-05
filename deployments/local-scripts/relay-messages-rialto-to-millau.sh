@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # A script for relaying Rialto messages to the Millau chain.
 #
 # Will not work unless both the Rialto and Millau are running (see `run-rialto-node.sh`
@@ -9,7 +9,7 @@ MILLAU_PORT="${MILLAU_PORT:-9945}"
 RIALTO_PORT="${RIALTO_PORT:-9944}"
 
 RUST_LOG=bridge=debug \
-./target/debug/substrate-relay relay-messages rialto-to-millau \
+./target/release/substrate-relay relay-messages rialto-to-millau \
 	--relayer-mode=altruistic \
 	--lane 00000000 \
 	--source-host localhost \

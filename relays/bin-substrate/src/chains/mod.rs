@@ -26,11 +26,17 @@ pub mod rialto_parachain_messages_to_millau;
 pub mod rialto_parachains_to_millau;
 pub mod westend_headers_to_millau;
 pub mod westend_parachains_to_millau;
+pub mod pass3d_headers_to_pass3dt;
+pub mod pass3dt_headers_to_pass3d;
+pub mod pass3d_messages_to_pass3dt;
+pub mod pass3dt_messages_to_pass3d;
 
 mod millau;
 mod rialto;
 mod rialto_parachain;
 mod westend;
+mod pass3d;
+mod pass3dt;
 
 #[cfg(test)]
 mod tests {

@@ -130,6 +130,10 @@ pub enum CustomNetworkId {
 	Rialto,
 	/// The RialtoParachain network ID, associated with Westend.
 	RialtoParachain,
+	/// The Millau network ID, associated with Kusama.
+	Pass3dt,
+	/// The Rialto network ID, associated with Polkadot.
+	Pass3d,
 }
 
 impl CustomNetworkId {
@@ -138,6 +142,8 @@ impl CustomNetworkId {
 			CustomNetworkId::Millau => NetworkId::Kusama,
 			CustomNetworkId::Rialto => NetworkId::Polkadot,
 			CustomNetworkId::RialtoParachain => NetworkId::Westend,
+			CustomNetworkId::Pass3dt => NetworkId::Kusama,
+			CustomNetworkId::Pass3d => NetworkId::Polkadot,
 		}
 	}
 }

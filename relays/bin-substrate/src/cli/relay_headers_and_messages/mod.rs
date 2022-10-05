@@ -43,6 +43,8 @@ use crate::{
 		millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
 		rialto_headers_to_millau::RialtoToMillauCliBridge,
 		rialto_parachains_to_millau::RialtoParachainToMillauCliBridge,
+		pass3dt_headers_to_pass3d::Pass3dtToPass3dCliBridge,
+		pass3d_headers_to_pass3dt::Pass3dToPass3dtCliBridge,
 	},
 	cli::{
 		bridge::{
@@ -252,14 +254,20 @@ where
 declare_chain_cli_schema!(Millau, millau);
 declare_chain_cli_schema!(Rialto, rialto);
 declare_chain_cli_schema!(RialtoParachain, rialto_parachain);
+declare_chain_cli_schema!(Pass3dt, pass3dt);
+declare_chain_cli_schema!(Pass3d, pass3d);
 // Means to override signers of different layer transactions.
 declare_chain_cli_schema!(MillauHeadersToRialto, millau_headers_to_rialto);
 declare_chain_cli_schema!(MillauHeadersToRialtoParachain, millau_headers_to_rialto_parachain);
 declare_chain_cli_schema!(RialtoHeadersToMillau, rialto_headers_to_millau);
 declare_chain_cli_schema!(RialtoParachainsToMillau, rialto_parachains_to_millau);
+declare_chain_cli_schema!(Pass3dtHeadersToPass3d, pass3dt_headers_to_pass3d);
+declare_chain_cli_schema!(Pass3dHeadersToPass3dt, pass3d_headers_to_pass3dt);
+
 // All supported bridges.
 declare_relay_to_relay_bridge_schema!(Millau, Rialto);
 declare_relay_to_parachain_bridge_schema!(Millau, RialtoParachain, Rialto);
+declare_relay_to_relay_bridge_schema!(Pass3dt, Pass3d);
 
 #[async_trait]
 trait Full2WayBridgeBase: Sized + Send + Sync {
@@ -440,6 +448,32 @@ impl Full2WayBridge for MillauRialtoFull2WayBridge {
 	}
 }
 
+
+pub struct Pass3dtPass3dFull2WayBridge {
+	base: <Self as Full2WayBridge>::Base,
+}
+
+#[async_trait]
+impl Full2WayBridge for Pass3dtPass3dFull2WayBridge {
+	type Base = RelayToRelayBridge<Self::L2R, Self::R2L>;
+	type Left = relay_pass3dt_client::Pass3dt;
+	type Right = relay_pass3d_client::Pass3d;
+	type L2R = Pass3dtToPass3dCliBridge;
+	type R2L = Pass3dToPass3dtCliBridge;
+
+	fn new(base: Self::Base) -> anyhow::Result<Self> {
+		Ok(Self { base })
+	}
+
+	fn base(&self) -> &Self::Base {
+		&self.base
+	}
+
+	fn mut_base(&mut self) -> &mut Self::Base {
+		&mut self.base
+	}
+}
+
 pub struct MillauRialtoParachainFull2WayBridge {
 	base: <Self as Full2WayBridge>::Base,
 }
@@ -470,6 +504,7 @@ impl Full2WayBridge for MillauRialtoParachainFull2WayBridge {
 pub enum RelayHeadersAndMessages {
 	MillauRialto(MillauRialtoHeadersAndMessages),
 	MillauRialtoParachain(MillauRialtoParachainHeadersAndMessages),
+	Pass3dtPass3d(Pass3dtPass3dHeadersAndMessages),
 }
 
 impl RelayHeadersAndMessages {
@@ -482,6 +517,8 @@ impl RelayHeadersAndMessages {
 				MillauRialtoParachainFull2WayBridge::new(params.into_bridge().await?)?
 					.run()
 					.await,
+			RelayHeadersAndMessages::Pass3dtPass3d(params) =>
+				Pass3dtPass3dFull2WayBridge::new(params.into_bridge().await?)?.run().await,
 		}
 	}
 }

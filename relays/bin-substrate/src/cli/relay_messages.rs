@@ -24,6 +24,8 @@ use crate::chains::{
 	millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
 	rialto_headers_to_millau::RialtoToMillauCliBridge,
 	rialto_parachains_to_millau::RialtoParachainToMillauCliBridge,
+	pass3dt_headers_to_pass3d::Pass3dtToPass3dCliBridge,
+	pass3d_headers_to_pass3dt::Pass3dToPass3dtCliBridge,
 };
 use messages_relay::relay_strategy::MixStrategy;
 use relay_substrate_client::{AccountIdOf, AccountKeyPairOf, BalanceOf, TransactionSignScheme};
@@ -120,6 +122,8 @@ impl MessagesRelayer for MillauToRialtoCliBridge {}
 impl MessagesRelayer for RialtoToMillauCliBridge {}
 impl MessagesRelayer for MillauToRialtoParachainCliBridge {}
 impl MessagesRelayer for RialtoParachainToMillauCliBridge {}
+impl MessagesRelayer for Pass3dtToPass3dCliBridge {}
+impl MessagesRelayer for Pass3dToPass3dtCliBridge {}
 
 impl RelayMessages {
 	/// Run the command.
@@ -131,6 +135,8 @@ impl RelayMessages {
 				MillauToRialtoParachainCliBridge::relay_messages(self),
 			FullBridge::RialtoParachainToMillau =>
 				RialtoParachainToMillauCliBridge::relay_messages(self),
+			FullBridge::Pass3dtToPass3d => Pass3dtToPass3dCliBridge::relay_messages(self),
+			FullBridge::Pass3dToPass3dt => Pass3dToPass3dtCliBridge::relay_messages(self),
 		}
 		.await
 	}

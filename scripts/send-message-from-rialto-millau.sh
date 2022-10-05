@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Used for manually sending a message to a running network.
 #
@@ -11,18 +11,16 @@ RIALTO_PORT="${RIALTO_PORT:-9944}"
 case "$1" in
 	remark)
 		RUST_LOG=runtime=trace,substrate-relay=trace,bridge=trace \
-		./target/debug/substrate-relay send-message rialto-to-millau \
+		./target/release/substrate-relay send-message rialto-to-millau \
 			--source-host localhost \
 			--source-port $RIALTO_PORT \
-			--target-signer //Alice \
 			--source-signer //Bob \
 			--lane 00000000 \
-			--origin Target \
-			remark \
+			raw aaaa
 		;;
 	transfer)
 		RUST_LOG=runtime=trace,substrate-relay=trace,bridge=trace \
-		./target/debug/substrate-relay send-message rialto-to-millau \
+		./target/release/substrate-relay send-message rialto-to-millau \
 			--source-host localhost \
 			--source-port $RIALTO_PORT \
 			--target-signer //Alice \

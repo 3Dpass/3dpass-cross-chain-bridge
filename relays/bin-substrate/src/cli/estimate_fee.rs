@@ -20,6 +20,8 @@ use crate::{
 		millau_headers_to_rialto_parachain::MillauToRialtoParachainCliBridge,
 		rialto_headers_to_millau::RialtoToMillauCliBridge,
 		rialto_parachains_to_millau::RialtoParachainToMillauCliBridge,
+		pass3dt_headers_to_pass3d::Pass3dtToPass3dCliBridge,
+		pass3d_headers_to_pass3dt::Pass3dToPass3dtCliBridge,
 	},
 	cli::{
 		bridge::{FullBridge, MessagesCliBridge},
@@ -114,6 +116,8 @@ impl FeeEstimator for MillauToRialtoCliBridge {}
 impl FeeEstimator for RialtoToMillauCliBridge {}
 impl FeeEstimator for MillauToRialtoParachainCliBridge {}
 impl FeeEstimator for RialtoParachainToMillauCliBridge {}
+impl FeeEstimator for Pass3dtToPass3dCliBridge {}
+impl FeeEstimator for Pass3dToPass3dtCliBridge {}
 
 impl EstimateFee {
 	/// Run the command.
@@ -125,6 +129,8 @@ impl EstimateFee {
 				MillauToRialtoParachainCliBridge::estimate_fee(self),
 			FullBridge::RialtoParachainToMillau =>
 				RialtoParachainToMillauCliBridge::estimate_fee(self),
+			FullBridge::Pass3dtToPass3d => Pass3dtToPass3dCliBridge::estimate_fee(self),
+			FullBridge::Pass3dToPass3dt => Pass3dToPass3dtCliBridge::estimate_fee(self),
 		}
 		.await
 	}
@@ -254,7 +260,7 @@ mod tests {
 		// when
 		let res = EstimateFee::from_iter(vec![
 			"estimate_fee",
-			"rialto-to-millau",
+			"rialto-to-pass3dt",
 			"--source-port",
 			"1234",
 			"--conversion-rate-override",
