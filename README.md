@@ -1,4 +1,4 @@
-# Parity Bridges Common
+# 3DPass Cross-chain Bridge
 
 This is a collection of components for building bridges.
 
